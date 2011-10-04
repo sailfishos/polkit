@@ -1,0 +1,9 @@
+<package project="Mer:Trunk:Base" name="polkit">
+  <title>PolicyKit Authorization Framework</title>
+  <description>PolicyKit is a toolkit for defining and handling authorizations.
+It is used for allowing unprivileged processes to speak to privileged
+processes.
+
+</description>
+  <url>http://www.freedesktop.org/wiki/Software/PolicyKit</url>
+</package>
