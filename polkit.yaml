@@ -1,0 +1,41 @@
+Name: polkit
+Summary: PolicyKit Authorization Framework
+Version: 0.104
+Release: 1
+Group: System/Libraries
+License: LGPLv2+
+URL: http://www.freedesktop.org/wiki/Software/PolicyKit
+Sources:
+    - http://hal.freedesktop.org/releases/%{name}-%{version}.tar.gz
+Description: |
+    PolicyKit is a toolkit for defining and handling authorizations.
+    It is used for allowing unprivileged processes to speak to privileged
+    processes.
+
+Requires:
+    - dbus
+PkgBR:
+    - expat-devel
+    - pam-devel
+    - intltool
+PkgConfigBR:
+    - glib-2.0
+    - libsystemd-login
+Configure: configure
+ConfigOptions:
+    - --disable-gtk-doc
+    - --libexecdir=%{_libexecdir}/polkit-1
+    - --disable-introspection
+    - --enable-systemd=yes
+Builder: make
+LocaleName: polkit-1
+SubPackages:
+    - Name: devel
+      Summary: Development files for PolicyKit
+      Group: Development/Libraries
+      Description: Development files for PolicyKit.
+      Requires:
+          - "%name = %{version}-%{release}"
+          - pkgconfig
+          - glib2-devel
+

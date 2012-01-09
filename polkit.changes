@@ -1,3 +1,12 @@
+* Mon Jan 09 2012 Marko Saukko <marko.saukko@cybecom.com> - 0.104
+- Updated to latest upstream
+- Dropped patches that we not applied:
+  0001-Fix-Bug-26982-pkexec-information-disclosure-vulnerability.patch  
+  0002-fix-polkit-sluggishness-remove-unneeded-repeat-db-loads.patch
+- Fixes MER#96: Added --enable-systemd=yes and dropped consolekit deps.
+- Dropped desktop-policy and docs subpackages
+- Added .yaml for spectacle
+
 * Tue Jun 28 2011 Chris Ferron <chris.e.ferron@linux.intel.com> - 0.101
 - PACKAGE CLEANUP - Removed unnecessary Obsoletes for PolicyKit as there is no other packages that Requires it, there is no need to add and maintain special version of package.
 
