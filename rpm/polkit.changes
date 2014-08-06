@@ -37,8 +37,6 @@
 
 * Mon Oct 05 2009 Anas Nashif <anas.nashif@intel.com> - 0.95
 - Define polkituser uid for usage in %pre section
-
-* Mon Oct 05 2009 Anas Nashif <anas.nashif@intel.com> - 0.95
 - Update to 0.95.git20090913
 
 * Thu Sep 24 2009 Zhang Qiang <qiang.z.zhang@intel.com> 0.94
