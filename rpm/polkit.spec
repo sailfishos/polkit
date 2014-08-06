@@ -63,6 +63,11 @@ if [ "$1" -eq 0 ]; then
 systemctl stop polkit.service
 fi
 
+%pre
+# Make sure user and group "polkitd" exist
+getent group polkitd >/dev/null || groupadd -r polkitd
+getent passwd polkitd >/dev/null || useradd -r -g polkitd -d / -s /sbin/nologin -c "User for polkitd" polkitd
+
 %post
 /sbin/ldconfig
 systemctl daemon-reload
@@ -92,8 +97,8 @@ systemctl daemon-reload
 # see upstream docs for why these permissions are necessary
 %attr(4755,root,root) %{_bindir}/pkexec
 %attr(4755,root,root) %{_libdir}/polkit-1/polkit-agent-helper-1
-%attr(0700,root,root) %config %dir %{_sysconfdir}/polkit-1/rules.d
-%attr(0700,root,root) %dir %{_datadir}/polkit-1/rules.d
+%attr(0700,polkitd,root) %config %dir %{_sysconfdir}/polkit-1/rules.d
+%attr(0700,polkitd,root) %dir %{_datadir}/polkit-1/rules.d
 
 %files devel
 %defattr(-,root,root,-)
