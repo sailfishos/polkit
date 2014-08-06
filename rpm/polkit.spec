@@ -44,6 +44,7 @@ Development files for polkit.
 
 %build
 
+cd %{name}
 # Fix autotools-related issues with Git checkout timestamps, adapted from:
 # http://www.gnu.org/software/automake/manual/html_node/CVS.html#All-Files-in-CVS
 # (see also: http://stackoverflow.com/questions/934051)
@@ -70,6 +71,7 @@ done
 make %{?_smp_mflags}
 
 %install
+cd %{name}
 rm -rf %{buildroot}
 %make_install
 %find_lang polkit-1
@@ -93,9 +95,9 @@ systemctl reload-or-try-restart polkit.service
 /sbin/ldconfig
 systemctl daemon-reload
 
-%files -f polkit-1.lang
+%files -f %{name}/polkit-1.lang
 %defattr(-,root,root,-)
-%doc COPYING
+%doc %{name}/COPYING
 %{_libdir}/lib*.so.*
 %dir %{_libdir}/polkit-1
 %{_datadir}/dbus-1/system-services/*
