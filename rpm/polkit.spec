@@ -43,6 +43,22 @@ Development files for polkit.
 %setup -q -n %{name}-%{version}
 
 %build
+
+# Fix autotools-related issues with Git checkout timestamps, adapted from:
+# http://www.gnu.org/software/automake/manual/html_node/CVS.html#All-Files-in-CVS
+# (see also: http://stackoverflow.com/questions/934051)
+for aclocal_file in $(find . -type f -a -name aclocal.m4); do
+    (
+        cd $(dirname $aclocal_file)
+        sleep 1
+        touch aclocal.m4
+        sleep 1
+        touch configure config.h.in
+        sleep 1
+        find . -name Makefile.in -exec touch '{}' +
+    )
+done
+
 %configure --disable-static \
     --disable-gtk-doc \
     --disable-man-pages \
