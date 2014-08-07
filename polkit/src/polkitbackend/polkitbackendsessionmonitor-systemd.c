@@ -31,6 +31,8 @@
 #include <polkit/polkit.h>
 #include "polkitbackendsessionmonitor.h"
 
+#include <getdef.h>
+
 /* <internal>
  * SECTION:polkitbackendsessionmonitor
  * @title: PolkitBackendSessionMonitor
@@ -299,6 +301,16 @@ polkit_backend_session_monitor_get_user_for_subject (PolkitBackendSessionMonitor
     }
   else if (POLKIT_IS_UNIX_SESSION (subject))
     {
+      if (g_strcmp0 (polkit_unix_session_get_session_id (POLKIT_UNIX_SESSION (subject)), "sailfish") == 0)
+        {
+          // XXX: Dirty Sailfish OS hack ("sailfish" session is always nemo user)
+          uid = getdef_num ("UID_MIN", -1);
+          if (uid != -1)
+            {
+              ret = polkit_unix_user_new (uid);
+              goto out;
+            }
+        }
 
       if (sd_session_get_uid (polkit_unix_session_get_session_id (POLKIT_UNIX_SESSION (subject)), &uid) < 0)
         {
@@ -385,6 +397,10 @@ polkit_backend_session_monitor_get_session_for_subject (PolkitBackendSessionMoni
     }
 
  out:
+
+  // XXX: Dirty hack to fallback to a (fake) session if there is none
+  if (!session)
+    session = polkit_unix_session_new ("sailfish");
 
   return session;
 }

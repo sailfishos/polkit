@@ -18,6 +18,7 @@ BuildRequires:  pkgconfig(glib-2.0)
 BuildRequires:  pkgconfig(libsystemd-login)
 BuildRequires:  pkgconfig(expat)
 BuildRequires:  pkgconfig(mozjs-17.0)
+BuildRequires:  pkgconfig(libshadowutils)
 BuildRequires:  pam-devel
 BuildRequires:  intltool
 
@@ -59,6 +60,10 @@ for aclocal_file in $(find . -type f -a -name aclocal.m4); do
         find . -name Makefile.in -exec touch '{}' +
     )
 done
+
+# Set these here, so we don't need to patch configure
+export CFLAGS=$(pkg-config --cflags libshadowutils)
+export LIBS=$(pkg-config --libs libshadowutils)
 
 %configure --disable-static \
     --disable-gtk-doc \
