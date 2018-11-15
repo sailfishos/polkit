@@ -5,7 +5,7 @@ Release:    1
 Group:      System/Libraries
 License:    LGPLv2+
 URL:        http://www.freedesktop.org/wiki/Software/PolicyKit
-Source0:    http://hal.freedesktop.org/releases/%{name}-%{version}.tar.gz
+Source0:    %{name}-%{version}.tar.gz
 Source1:    dbus-org.freedesktop.PolicyKit1.service
 Patch0:     patches/0.108/build-Fix-.gir-generation-for-parallel-make.patch
 Patch1:     patches/0.110/07_set-XAUTHORITY-environment-variable-if-unset.patch
@@ -38,7 +38,10 @@ Patch27:    patches/0.113/Fix-a-memory-leak-when-registering-an-authentication.p
 Patch28:    patches/0.113/CVE-2015-3255-Fix-GHashTable-usage.patch
 Patch29:    patches/0.113/Fix-use-after-free-in-polkitagentsession.c.patch
 Patch30:    patches/0.113/README-Note-to-send-security-reports-via-DBus-s-mech.patch
-Patch31:    patches/CVE-2018-1116.patch
+Patch31:    patches/master/Fix-multi-line-pam-text-info.patch
+Patch32:    patches/CVE-2018-1116.patch
+Patch33:    patches/0001-dbus-Use-systemd-service.patch
+Patch34:    patches/0002-build-Disable-gtk-doc-support.patch
 Requires:   dbus
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
@@ -47,7 +50,9 @@ BuildRequires:  pkgconfig(libsystemd-login)
 BuildRequires:  expat-devel
 BuildRequires:  pam-devel
 BuildRequires:  intltool
+BuildRequires:  libtool
 BuildRequires:  gobject-introspection
+BuildRequires:  gobject-introspection-devel
 
 
 %description
@@ -101,19 +106,24 @@ Development files for PolicyKit.
 %patch29 -p1
 %patch30 -p1
 %patch31 -p1
+%patch32 -p1
+%patch33 -p1
+%patch34 -p1
 
 %build
-%configure --disable-static \
-           --disable-gtk-doc \
-           --disable-man-pages \
-           --libexecdir=%{_libexecdir}/polkit-1 \
-           --disable-introspection \
-           --enable-systemd=yes
+%autogen --disable-static \
+         --disable-gtk-doc \
+         --disable-man-pages \
+         --libexecdir=%{_libexecdir}/polkit-1 \
+         --disable-introspection \
+         --enable-systemd=yes \
+         --with-os-type=mer
+# --with-os-type=mer is just some value for os type so it doesn't complain
+# autogen.sh runs also configure
 
 make %{?jobs:-j%jobs}
 
 %install
-rm -rf %{buildroot}
 %make_install
 install -D -m 660 %{SOURCE1} %{buildroot}/%{_lib}/systemd/system/dbus-org.freedesktop.PolicyKit1.service
 %find_lang polkit-1
