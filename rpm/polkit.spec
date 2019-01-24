@@ -66,7 +66,6 @@ processes.
 Summary:    Development files for PolicyKit
 Group:      Development/Libraries
 Requires:   %{name} = %{version}-%{release}
-Requires:   %name = %{version}-%{release}
 Requires:   pkgconfig
 Requires:   glib2-devel
 
@@ -121,7 +120,7 @@ Development files for PolicyKit.
 # --with-os-type=mer is just some value for os type so it doesn't complain
 # autogen.sh runs also configure
 
-make %{?jobs:-j%jobs}
+make %{?_smp_mflags}
 
 %install
 %make_install
@@ -136,7 +135,7 @@ install -D -m 644 %{SOURCE1} %{buildroot}/%{_lib}/systemd/system/dbus-org.freede
 
 %files -f polkit-1.lang
 %defattr(-,root,root,-)
-%doc COPYING
+%license COPYING
 %{_libdir}/lib*.so.*
 %dir %{_libdir}/polkit-1
 %dir %{_libdir}/polkit-1/extensions
