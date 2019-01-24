@@ -125,7 +125,7 @@ make %{?jobs:-j%jobs}
 
 %install
 %make_install
-install -D -m 660 %{SOURCE1} %{buildroot}/%{_lib}/systemd/system/dbus-org.freedesktop.PolicyKit1.service
+install -D -m 644 %{SOURCE1} %{buildroot}/%{_lib}/systemd/system/dbus-org.freedesktop.PolicyKit1.service
 %find_lang polkit-1
 
 
