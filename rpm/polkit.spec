@@ -124,7 +124,7 @@ make %{?_smp_mflags}
 
 %install
 %make_install
-install -D -m 644 %{SOURCE1} %{buildroot}/%{_lib}/systemd/system/dbus-org.freedesktop.PolicyKit1.service
+install -D -m 644 %{SOURCE1} %{buildroot}/%{_libdir}/systemd/system/dbus-org.freedesktop.PolicyKit1.service
 %find_lang polkit-1
 
 
@@ -159,7 +159,7 @@ install -D -m 644 %{SOURCE1} %{buildroot}/%{_lib}/systemd/system/dbus-org.freede
 %dir %{_sharedstatedir}/polkit-1/localauthority/30-site.d
 %dir %{_sharedstatedir}/polkit-1/localauthority/50-local.d
 %dir %{_sharedstatedir}/polkit-1/localauthority/90-mandatory.d
-/%{_lib}/systemd/system/dbus-org.freedesktop.PolicyKit1.service
+%{_libdir}/systemd/system/dbus-org.freedesktop.PolicyKit1.service
 
 
 %files devel
