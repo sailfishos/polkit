@@ -42,6 +42,7 @@ Patch31:    patches/master/Fix-multi-line-pam-text-info.patch
 Patch32:    patches/CVE-2018-1116.patch
 Patch33:    patches/0001-dbus-Use-systemd-service.patch
 Patch34:    patches/0002-build-Disable-gtk-doc-support.patch
+Patch35:    patches/0003-Support-for-annotation-identity-group-check.patch
 Requires:   dbus
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
@@ -108,6 +109,7 @@ Development files for PolicyKit.
 %patch32 -p1
 %patch33 -p1
 %patch34 -p1
+%patch35 -p1
 
 %build
 %autogen --disable-static \

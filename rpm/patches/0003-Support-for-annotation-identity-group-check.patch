@@ -1,0 +1,48 @@
+From d3e65e7c2693dc0afbef7ae03423b7c315fa5eab Mon Sep 17 00:00:00 2001
+From: Marko Kenttala <marko.kenttala@jolla.com>
+Date: Thu, 16 Jan 2020 13:06:00 +0200
+Subject: [PATCH] Support for annotation identity group check
+
+---
+ .../polkitbackendinteractiveauthority.c       | 20 ++++++++++++++++++-
+ 1 file changed, 19 insertions(+), 1 deletion(-)
+
+diff --git a/src/polkitbackend/polkitbackendinteractiveauthority.c b/src/polkitbackend/polkitbackendinteractiveauthority.c
+index 97a8d80..7b4deda 100644
+--- a/src/polkitbackend/polkitbackendinteractiveauthority.c
++++ b/src/polkitbackend/polkitbackendinteractiveauthority.c
+@@ -804,12 +804,30 @@ may_identity_check_authorization (PolkitBackendInteractiveAuthority   *interacti
+           g_error_free (error);
+           continue;
+         }
+-      if (polkit_identity_equal (identity, owner_identity))
++      if (POLKIT_IS_UNIX_USER (owner_identity) && polkit_identity_equal (identity, owner_identity))
+         {
+           ret = TRUE;
+           g_object_unref (owner_identity);
+           goto out;
+         }
++      else if (POLKIT_IS_UNIX_GROUP (owner_identity))
++        {
++          PolkitUnixGroup *owner_group = POLKIT_UNIX_GROUP (owner_identity);
++          const gchar *user = polkit_unix_user_get_name (POLKIT_UNIX_USER (identity));
++          struct group *gr = getgrgid (polkit_unix_group_get_gid (owner_group));
++          if (gr && gr->gr_mem && user)
++            {
++              gint i;
++              for (i = 0; gr->gr_mem[i]; i++)
++                if (!g_strcmp0 (user, gr->gr_mem[i]))
++                  {
++                    ret = TRUE;
++                    g_object_unref (owner_identity);
++                    goto out;
++                  }
++
++            }
++        }
+       g_object_unref (owner_identity);
+     }
+ 
+-- 
+2.17.1
+
