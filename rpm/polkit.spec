@@ -43,11 +43,12 @@ Patch32:    patches/CVE-2018-1116.patch
 Patch33:    patches/0001-dbus-Use-systemd-service.patch
 Patch34:    patches/0002-build-Disable-gtk-doc-support.patch
 Patch35:    patches/0003-Support-for-annotation-identity-group-check.patch
+Patch36:    patches/0004-Fix-build-with-systemd-v233.patch
 Requires:   dbus
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 BuildRequires:  pkgconfig(glib-2.0)
-BuildRequires:  pkgconfig(libsystemd-login)
+BuildRequires:  pkgconfig(libsystemd)
 BuildRequires:  expat-devel
 BuildRequires:  pam-devel
 BuildRequires:  intltool
@@ -110,6 +111,7 @@ Development files for PolicyKit.
 %patch33 -p1
 %patch34 -p1
 %patch35 -p1
+%patch36 -p1
 
 %build
 %autogen --disable-static \
