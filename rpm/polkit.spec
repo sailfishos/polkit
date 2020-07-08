@@ -2,7 +2,6 @@ Name:       polkit
 Summary:    PolicyKit Authorization Framework
 Version:    0.105
 Release:    1
-Group:      System/Libraries
 License:    LGPLv2+
 URL:        http://www.freedesktop.org/wiki/Software/PolicyKit
 Source0:    %{name}-%{version}.tar.gz
@@ -66,7 +65,6 @@ processes.
 
 %package devel
 Summary:    Development files for PolicyKit
-Group:      Development/Libraries
 Requires:   %{name} = %{version}-%{release}
 Requires:   pkgconfig
 Requires:   glib2-devel
@@ -76,42 +74,7 @@ Development files for PolicyKit.
 
 
 %prep
-%setup -q -n %{name}-%{version}/%{name}
-%patch0 -p1
-%patch1 -p1
-%patch2 -p1
-%patch3 -p1
-%patch4 -p1
-%patch5 -p1
-%patch6 -p1
-%patch7 -p1
-%patch8 -p1
-%patch9 -p1
-%patch10 -p1
-%patch11 -p1
-%patch12 -p1
-%patch13 -p1
-%patch14 -p1
-%patch16 -p1
-%patch17 -p1
-%patch18 -p1
-%patch20 -p1
-%patch21 -p1
-%patch22 -p1
-%patch23 -p1
-%patch24 -p1
-%patch25 -p1
-%patch26 -p1
-%patch27 -p1
-%patch28 -p1
-%patch29 -p1
-%patch30 -p1
-%patch31 -p1
-%patch32 -p1
-%patch33 -p1
-%patch34 -p1
-%patch35 -p1
-%patch36 -p1
+%autosetup -p1 -n %{name}-%{version}/%{name}
 
 %build
 %autogen --disable-static \
@@ -124,11 +87,11 @@ Development files for PolicyKit.
 # --with-os-type=mer is just some value for os type so it doesn't complain
 # autogen.sh runs also configure
 
-make %{?_smp_mflags}
+%make_build
 
 %install
 %make_install
-install -D -m 644 %{SOURCE1} %{buildroot}/%{_lib}/systemd/system/dbus-org.freedesktop.PolicyKit1.service
+install -D -m 644 %{SOURCE1} %{buildroot}%{_unitdir}/dbus-org.freedesktop.PolicyKit1.service
 %find_lang polkit-1
 
 
@@ -163,7 +126,7 @@ install -D -m 644 %{SOURCE1} %{buildroot}/%{_lib}/systemd/system/dbus-org.freede
 %dir %{_sharedstatedir}/polkit-1/localauthority/30-site.d
 %dir %{_sharedstatedir}/polkit-1/localauthority/50-local.d
 %dir %{_sharedstatedir}/polkit-1/localauthority/90-mandatory.d
-/%{_lib}/systemd/system/dbus-org.freedesktop.PolicyKit1.service
+%{_unitdir}/dbus-org.freedesktop.PolicyKit1.service
 
 
 %files devel
