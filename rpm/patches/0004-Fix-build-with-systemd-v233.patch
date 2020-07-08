@@ -6,7 +6,7 @@ The fix is based on 2291767a014f5a04a92ca6f0eb472794f212ca67 upstream commit.
 diff -purN polkit/configure.ac polkit-izh/configure.ac
 --- polkit/configure.ac	2020-05-01 14:23:48.027758476 +0000
 +++ polkit-izh/configure.ac	2020-05-01 14:43:41.438236473 +0000
-@@ -158,14 +158,18 @@ AC_ARG_ENABLE([systemd],
+@@ -158,9 +158,13 @@ AC_ARG_ENABLE([systemd],
                [enable_systemd=auto])
  if test "$enable_systemd" != "no"; then
    PKG_CHECK_MODULES(SYSTEMD,
@@ -21,6 +21,9 @@ diff -purN polkit/configure.ac polkit-izh/configure.ac
 +                        libsystemd=no)])
    if test "$have_systemd" = "yes"; then
      SESSION_TRACKING=systemd
+     save_LIBS=$LIBS
+@@ -169,7 +173,7 @@ AC_ARG_ENABLE([systemd],
+     LIBS=$save_LIBS
    else
      if test "$enable_systemd" = "yes"; then
 -      AC_MSG_ERROR([systemd support requested but libsystemd-login1 library not found])
