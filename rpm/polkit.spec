@@ -48,7 +48,7 @@ Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig
 BuildRequires:  pkgconfig(glib-2.0)
 BuildRequires:  pkgconfig(libsystemd)
-BuildRequires:  expat-devel
+BuildRequires:  pkgconfig(expat)
 BuildRequires:  pam-devel
 BuildRequires:  intltool
 BuildRequires:  libtool
@@ -66,8 +66,7 @@ processes.
 %package devel
 Summary:    Development files for PolicyKit
 Requires:   %{name} = %{version}-%{release}
-Requires:   pkgconfig
-Requires:   glib2-devel
+Requires:   pkgconfig(glib-2.0)
 
 %description devel
 Development files for PolicyKit.
