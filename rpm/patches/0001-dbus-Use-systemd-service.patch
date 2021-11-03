@@ -12,13 +12,13 @@ diff --git a/data/org.freedesktop.PolicyKit1.service.in b/data/org.freedesktop.P
 index b6cd02b..d907e3d 100644
 --- a/data/org.freedesktop.PolicyKit1.service.in
 +++ b/data/org.freedesktop.PolicyKit1.service.in
-@@ -1,4 +1,5 @@
+@@ -1,4 +1,4 @@
  [D-BUS Service]
  Name=org.freedesktop.PolicyKit1
 -Exec=@libexecdir@/polkitd --no-debug
 +Exec=/bin/false
  User=root
-+SystemdService=dbus-org.freedesktop.PolicyKit1.service
+
 -- 
 2.17.1
 

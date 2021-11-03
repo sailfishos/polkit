@@ -230,7 +230,7 @@ index f45abc4..4e882e6 100644
   * polkit_authority_register_authentication_agent_with_options() for the
   * asynchronous version.
 diff --git a/src/polkitagent/polkitagentlistener.c b/src/polkitagent/polkitagentlistener.c
-index 0d97501..10dbfb9 100644
+index 5bddd03..2bfda2d 100644
 --- a/src/polkitagent/polkitagentlistener.c
 +++ b/src/polkitagent/polkitagentlistener.c
 @@ -37,10 +37,7 @@
