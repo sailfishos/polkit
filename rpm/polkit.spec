@@ -69,9 +69,10 @@ Patch0057: patches/debian/Move-D-Bus-policy-file-to-usr-share-dbus-1-system.d.pa
 Patch0058: patches/debian/Statically-link-libpolkit-backend1-into-polkitd.patch
 Patch0059: patches/debian/Remove-example-null-backend.patch
 Patch0060: patches/debian/CVE-2021-3560.patch
-Patch0061: patches/0001-dbus-Use-systemd-service.patch
-Patch0062: patches/0002-build-Disable-gtk-doc-support.patch
-Patch0063: patches/0003-Support-for-annotation-identity-group-check.patch
+Patch0061: patches/debian/Local-Privilege-Escalation-in-polkit-s-pkexec-CVE-20.patch
+Patch0062: patches/0001-dbus-Use-systemd-service.patch
+Patch0063: patches/0002-build-Disable-gtk-doc-support.patch
+Patch0064: patches/0003-Support-for-annotation-identity-group-check.patch
 Requires:   dbus
 Requires(post): /sbin/ldconfig
 Requires(postun): /sbin/ldconfig

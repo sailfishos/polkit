@@ -61,3 +61,4 @@ Move-D-Bus-policy-file-to-usr-share-dbus-1-system.d.patch
 Statically-link-libpolkit-backend1-into-polkitd.patch
 Remove-example-null-backend.patch
 CVE-2021-3560.patch
+Local-Privilege-Escalation-in-polkit-s-pkexec-CVE-20.patch
