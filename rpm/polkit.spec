@@ -3,7 +3,7 @@ Summary:    PolicyKit Authorization Framework
 Version:    0.105
 Release:    1
 License:    LGPLv2+
-URL:        http://www.freedesktop.org/wiki/Software/PolicyKit
+URL:        https://github.com/sailfishos/polkit
 Source0:    %{name}-%{version}.tar.gz
 Source1:    polkit.service
 Source2:    genpatchlist.sh
