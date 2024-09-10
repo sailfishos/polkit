@@ -1,0 +1,27 @@
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
+From: Pekka Vuorela <pekka.vuorela@jolla.com>
+Date: Mon, 9 Sep 2024 16:44:58 +0300
+Subject: [PATCH] Revert to old systemd variable names
+
+Systemd 246 introduced underscored versions and deprecated the old ones
+to improve legibility. We don't have that yet so revert to old names
+for now.
+---
+ meson.build | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/meson.build b/meson.build
+index 302c189..61b542b 100644
+--- a/meson.build
++++ b/meson.build
+@@ -212,8 +212,8 @@ if systemd_dep.found()
+     # FIXME: systemd.pc file does not use variables with relative paths, so `define_variable` cannot be used
+     systemdsystemunitdir = systemd_dep.get_variable(pkgconfig : 'systemdsystemunitdir')
+   endif
+-  sysusers_dir = systemd_dep.get_variable(pkgconfig : 'sysusers_dir')
+-  tmpfiles_dir = systemd_dep.get_variable(pkgconfig : 'tmpfiles_dir')
++  sysusers_dir = systemd_dep.get_variable(pkgconfig : 'sysusersdir')
++  tmpfiles_dir = systemd_dep.get_variable(pkgconfig : 'tmpfilesdir')
+ else
+   if systemdsystemunitdir == ''
+     systemdsystemunitdir = '/usr/lib/systemd/system'
