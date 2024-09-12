@@ -1,4 +1,4 @@
-From d3e65e7c2693dc0afbef7ae03423b7c315fa5eab Mon Sep 17 00:00:00 2001
+From 0000000000000000000000000000000000000000 Mon Sep 17 00:00:00 2001
 From: Marko Kenttala <marko.kenttala@jolla.com>
 Date: Thu, 16 Jan 2020 13:06:00 +0200
 Subject: [PATCH] Support for annotation identity group check
@@ -8,10 +8,10 @@ Subject: [PATCH] Support for annotation identity group check
  1 file changed, 19 insertions(+), 1 deletion(-)
 
 diff --git a/src/polkitbackend/polkitbackendinteractiveauthority.c b/src/polkitbackend/polkitbackendinteractiveauthority.c
-index 97a8d80..7b4deda 100644
+index 972baf4..6c07288 100644
 --- a/src/polkitbackend/polkitbackendinteractiveauthority.c
 +++ b/src/polkitbackend/polkitbackendinteractiveauthority.c
-@@ -804,12 +804,30 @@ may_identity_check_authorization (PolkitBackendInteractiveAuthority   *interacti
+@@ -816,12 +816,30 @@ may_identity_check_authorization (PolkitBackendInteractiveAuthority   *interacti
            g_error_free (error);
            continue;
          }
@@ -43,6 +43,3 @@ index 97a8d80..7b4deda 100644
        g_object_unref (owner_identity);
      }
  
--- 
-2.17.1
-
